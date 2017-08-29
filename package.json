@@ -4,11 +4,13 @@
   "description": "Practice schema design",
   "main": "index.js",
   "scripts": {
+    "db-init": "psql < schema.sql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pkallas",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "pg": "^7.2.0"
   },
   "devDependencies": {
