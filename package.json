@@ -4,6 +4,7 @@
   "description": "Practice schema design",
   "main": "index.js",
   "scripts": {
+    "db-init": "psql < schema.sql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "pkallas",
