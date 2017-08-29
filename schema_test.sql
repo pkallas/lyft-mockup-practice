@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS Drive_By;
-CREATE DATABASE Drive_By;
+DROP DATABASE IF EXISTS Drive_By_Test;
+CREATE DATABASE Drive_By_Test;
 
-\c Drive_By
+\c Drive_By_Test
 
 CREATE TABLE "drivers" (
 "driver_id"  SERIAL NOT NULL ,
