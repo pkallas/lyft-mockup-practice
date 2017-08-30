@@ -5,41 +5,44 @@ const selectRidersText = `SELECT email, password FROM riders WHERE email = $1`;
 const lastTransactionDriversText = `SELECT last_transaction FROM drivers WHERE email = $1`;
 const lastTransactionRidersText = `SELECT last_transaction FROM riders WHERE email = $1`;
 
-const selectDrivers = (text, values) => {
+const selectDrivers = function(text, values, password) {
   let dbPassword = ""
-  let clientPassword = ""
   client.query(text, values)
-  .then(result => dbPassword = result.rows[1])
+  .then(result => {
+    console.log(result.rows[0]);
+    dbPassword = result.rows[0].password
+    bcrypt.compare(password, dbPassword)
+    .then(result => result)
+  })
   .catch(error => {
     console.log('Did not find driver');
     console.log(error);
   })
-  .then(result => bcrypt.compare(clientPassword, dbPassword))
 }
 
-const selectRiders = (text, values) => {
+function selectRiders(text, values, password) {
   let dbPassword = ""
-  let clientPassword = ""
   client.query(text, values)
-  .then(result => dbPassword = result.rows[1])
+  .then(result => dbPassword = result.rows[0])
   .catch(error => {
     console.log('Did not find rider');
     console.log(error);
   })
-  .then(result => bcrypt.compare(clientPassword, dbPassword))
+  .then(result => bcrypt.compare(password, dbPassword))
+  .then(result => result)
 }
 
-const lastTransactionDrivers = (text, values) => {
+function lastTransactionDrivers(text, values) {
   let transaction
   client.query(text, values)
-  .then(result => transaction = result.rows[1])
+  .then(result => transaction = result.rows[0])
   .catch(error)
 }
 
-const lastTransactionRiders = (text, values) => {
+function lastTransactionRiders(text, values) {
   let transaction
   client.query(text, values)
-  .then(result => transaction = result.row[1])
+  .then(result => transaction = result.rows[0])
   .catch(error)
 }
 
@@ -47,5 +50,7 @@ module.exports = {
   selectDriversText,
   selectRidersText,
   lastTransactionDriversText,
-  lastTransactionRidersText
+  lastTransactionRidersText,
+  selectDrivers,
+  selectRiders
 }
