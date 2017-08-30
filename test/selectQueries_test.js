@@ -7,9 +7,7 @@ const {
   lastTransactionDriversText,
   lastTransactionRidersText,
   selectDrivers,
-  selectRiders,
-  lastTransactionDrivers,
-  lastTransactionRiders
+  selectRiders
 } = require('../selectQueries.js');
 
 const {
@@ -18,11 +16,7 @@ const {
   insertIntoRidersText,
   insertIntoRiders,
   insertIntoPaymentInfoText,
-  insertIntoPaymentInfo,
-  insertLastTransactionIntoDriversText,
-  insertLastTransactionIntoDrivers,
-  insertLastTransactionIntoRidersText,
-  insertLastTransactionIntoRiders
+  insertIntoPaymentInfo
 } = require('../insertQueries.js');
 
 const expect = require('chai').expect;
@@ -47,6 +41,32 @@ describe('selectDrivers', function() {
   })
   after(function() {
     client.query('TRUNCATE TABLE drivers')
+    .then(result => console.log('Truncated Table'))
+    .catch(error => console.log(error))
+  })
+})
+
+describe('selectRiders', function() {
+  let rider = [
+    "Daenarys",
+    "Taergaryon",
+    "khaleesi@motherofdragons.com",
+    "theunburned",
+    "Viper",
+    "DS532959048",
+    "4358760917"
+  ];
+  before(function() {
+    return insertIntoRiders(insertIntoRidersText, rider).then((result) => {
+    })
+  })
+  it('should return true if password matches', function() {
+    return selectRiders(selectRidersText, ["khaleesi@motherofdragons.com"], "theunburned").then((result) => {
+      expect(result).to.equal(true)
+    })
+  })
+  after(function() {
+    client.query('TRUNCATE TABLE riders')
     .then(result => console.log('Truncated Table'))
     .catch(error => console.log(error))
   })
