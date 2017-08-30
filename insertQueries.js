@@ -27,17 +27,6 @@ function insertIntoDrivers(text, values) {
   })
 }
 
-let driver = [
-  "Aegon",
-  "Taergaryon",
-  "bastard@winterfell.com",
-  "jonsnow",
-  "Infinity Q6",
-  "JS769309784",
-  "3129805541"];
-
-insertIntoDrivers(insertIntoDriversText, driver)
-
 const insertIntoRidersText = `INSERT INTO drivers(first_name, last_name, email, password, phone_number)
 VALUES ($1, $2, $3, $4, $5)`;
 

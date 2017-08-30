@@ -12,7 +12,7 @@ CREATE TABLE drivers (
   password VARCHAR(250) NOT NULL,
   car VARCHAR(50) NOT NULL,
   drivers_license VARCHAR(250) NOT NULL,
-  phone_number VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(250) NOT NULL,
   last_transaction TIMESTAMP
 );
 
@@ -24,7 +24,7 @@ CREATE TABLE riders (
   email VARCHAR(250) NOT NULL UNIQUE,
   password VARCHAR(250) NOT NULL,
   payment_id  SERIAL NOT NULL,
-  phone_number VARCHAR(50) NOT NULL,
+  phone_number VARCHAR(250) NOT NULL,
   last_transaction TIMESTAMP
 );
 
