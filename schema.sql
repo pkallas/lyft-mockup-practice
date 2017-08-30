@@ -3,6 +3,7 @@ CREATE DATABASE drive_by;
 
 \c drive_by
 
+DROP TABLE IF EXISTS drivers;
 CREATE TABLE drivers (
   driver_id  SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
@@ -15,6 +16,7 @@ CREATE TABLE drivers (
   last_transaction TIMESTAMP
 );
 
+DROP TABLE IF EXISTS riders;
 CREATE TABLE riders (
   rider_id  SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
@@ -26,6 +28,7 @@ CREATE TABLE riders (
   last_transaction TIMESTAMP
 );
 
+DROP TABLE IF EXISTS payment_info;
 CREATE TABLE payment_info (
   payment_id  SERIAL PRIMARY KEY ,
   card_number INTEGER UNIQUE,
