@@ -6,7 +6,6 @@ drivers_license, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
 const insertIntoDrivers = function (text, values) {
   let dbPassword = values[3];
-  console.log('dbPassword:', dbPassword);
   return bcrypt.hash(dbPassword, 10)
   .then(hash => {
     values[3] = hash;
