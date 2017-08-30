@@ -28,26 +28,26 @@ const insertIntoRidersText = `INSERT INTO riders(first_name, last_name, email, p
 VALUES ($1, $2, $3, $4, $5)`;
 
 const insertIntoRiders = function (text, values) {
- return client.query(`INSERT INTO payment_info(card_number) VALUES(NULL)`)
- .then(result => {
-   let dbPassword = values[3];
-   return bcrypt.hash(dbPassword, 10)
-   .then(hash => {
-     values[3] = hash;
-     return (client.query(text, values)
-     .then(result => console.log('Successfully added data to riders table'))
-     .catch(error => {
-       console.log('Could not insert into riders table')
-       console.log(error)
-     })
-   )
-   })
-   .catch(error => {
-     console.log('Could not hash password')
-     console.log(error)
-   })
- })
- .catch(error => console.log(error))
+  return client.query(`INSERT INTO payment_info(card_number) VALUES(NULL)`)
+  .then(result => {
+    let dbPassword = values[3];
+    return bcrypt.hash(dbPassword, 10)
+    .then(hash => {
+      values[3] = hash;
+      return (client.query(text, values)
+      .then(result => console.log('Successfully added data to riders table'))
+      .catch(error => {
+        console.log('Could not insert into riders table')
+        console.log(error)
+      })
+    )
+    })
+    .catch(error => {
+      console.log('Could not hash password')
+      console.log(error)
+    })
+  })
+  .catch(error => console.log(error)
 }
 
 const insertIntoPaymentInfoText = `UPDATE payment_info
@@ -56,19 +56,19 @@ FROM riders
 WHERE payment_info.payment_id = riders.payment_id`;
 
 const insertIntoPaymentInfo = function (text, values) {
- return client.query(text, values)
- .then(result => console.log('Successfully added data to the payment_info table'))
- .catch(error => {
-   console.log('Could not insert into payment_info table')
-   console.log(error)
- })
+  return client.query(text, values)
+  .then(result => console.log('Successfully added data to the payment_info table'))
+  .catch(error => {
+    console.log('Could not insert into payment_info table')
+    console.log(error)
+  })
 }
 
 module.exports = {
- insertIntoDriversText,
- insertIntoDrivers,
- insertIntoRidersText,
- insertIntoRiders,
- insertIntoPaymentInfoText,
- insertIntoPaymentInfo,
+  insertIntoDriversText,
+  insertIntoDrivers,
+  insertIntoRidersText,
+  insertIntoRiders,
+  insertIntoPaymentInfoText,
+  insertIntoPaymentInfo,
 }
