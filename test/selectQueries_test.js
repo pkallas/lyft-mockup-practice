@@ -35,21 +35,19 @@ describe('selectDrivers', function() {
     "jonsnow",
     "Infinity Q6",
     "JS769309784",
-    "3129805541"]
-  console.log(typeof(selectDrivers));
-  before(function() {
-    insertIntoDrivers(insertIntoDriversText, driver)
+    "3129805541"];
+  before(function(done) {
+    console.log('running before!')
+    insertIntoDrivers(insertIntoDriversText, driver, done)
   })
-  after(function() {
-    client.query('TRUNCATE drivers')
-    .then(result => console.log('Truncated Table'))
-    .catch(error => console.log(error))
-  })
-  it('should return true if password matches', function(done) {
-    selectDrivers(selectDriversText, ["bastard@winterfell.com"], "jonsnow")
-    .then(result => {
+  it('should return true if password matches', function() {
+    selectDrivers(selectDriversText, ["bastard@winterfell.com"], "jonsnow", (result) => {
       expect(result).to.equal(true)
     })
-    done()
   })
+  // after(function() {
+  //   client.query('TRUNCATE TABLE drivers')
+  //   .then(result => console.log('Truncated Table'))
+  //   .catch(error => console.log(error))
+  // })
 })
