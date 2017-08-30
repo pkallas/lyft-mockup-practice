@@ -5,12 +5,13 @@ const insertIntoDriversText = `INSERT INTO drivers(first_name, last_name, email,
 drivers_license, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
 const insertIntoDrivers =  (text, values) => {
-  let dbpassword = values[3].pop();
+  let dbpassword = values.shift(3);
+  console.log('dbpassword', dbpassword);
   bcrypt.hash(dbpassword, 10)
   .then(hash => {
     console.log('Successfully hashed the password')
     dbpassword = hash;
-    values[3].unshift(dbpassword)
+    values.unshift(dbpassword)
   })
   .catch(error => {
     console.log('Could not hash password')
@@ -29,12 +30,12 @@ const insertIntoRidersText = `INSERT INTO drivers(first_name, last_name, email, 
 VALUES ($1, $2, $3, $4, $5)`;
 
 const insertIntoRiders = (text, values) => {
-  let dbpassword = values[3].pop();
+  let dbpassword = values.pop(3);
   bcrypt.hash(dbpassword, 10)
   .then(hash => {
     console.log('Successfully hashed the password')
     dbpassword = hash;
-    values[3].unshift(dbpassword)
+    values.unshift(dbpassword)
   })
   .catch(error => {
     console.log('Could not hash password')
@@ -95,5 +96,5 @@ module.exports = {
   insertLastTransactionIntoDriversText,
   insertLastTransactionIntoDrivers,
   insertLastTransactionIntoRidersText,
-  insertinsertLastTransactionIntoRiders
+  insertLastTransactionIntoRiders
 }

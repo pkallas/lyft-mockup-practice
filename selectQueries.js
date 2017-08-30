@@ -5,38 +5,37 @@ const selectRidersText = `SELECT email, password FROM riders WHERE email = $1`;
 const lastTransactionDriversText = `SELECT last_transaction FROM drivers WHERE email = $1`;
 const lastTransactionRidersText = `SELECT last_transaction FROM riders WHERE email = $1`;
 
-const selectDrivers = (text, values) => {
+function selectDrivers (text, values, password) => {
   let dbPassword = ""
-  let clientPassword = ""
   client.query(text, values)
   .then(result => dbPassword = result.rows[1])
   .catch(error => {
     console.log('Did not find driver');
     console.log(error);
   })
-  .then(result => bcrypt.compare(clientPassword, dbPassword))
+  .then(result => bcrypt.compare(password, dbPassword))
+  .then(result => return result)
 }
 
-const selectRiders = (text, values) => {
+function selectRiders (text, values, password) => {
   let dbPassword = ""
-  let clientPassword = ""
   client.query(text, values)
   .then(result => dbPassword = result.rows[1])
   .catch(error => {
     console.log('Did not find rider');
     console.log(error);
   })
-  .then(result => bcrypt.compare(clientPassword, dbPassword))
+  .then(result => bcrypt.compare(password, dbPassword))
 }
 
-const lastTransactionDrivers = (text, values) => {
+function lastTransactionDrivers (text, values) => {
   let transaction
   client.query(text, values)
   .then(result => transaction = result.rows[1])
   .catch(error)
 }
 
-const lastTransactionRiders = (text, values) => {
+function lastTransactionRiders (text, values) => {
   let transaction
   client.query(text, values)
   .then(result => transaction = result.row[1])

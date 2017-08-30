@@ -1,11 +1,12 @@
 {
-  "name": "relaxitaxi-schema-design",
+  "name": "lyft-mockup-practice",
   "version": "1.0.0",
   "description": "Practice schema design",
   "main": "index.js",
   "scripts": {
     "db-init": "psql < schema.sql",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "testdb-init": "psql < schema_test.sql",
+    "test": "mocha test/selectQueries_test.js"
   },
   "author": "pkallas",
   "license": "ISC",

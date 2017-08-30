@@ -1,8 +1,8 @@
 const { Client } = require('pg');
 const client = new Client({
-  user: 'johnware15',
+  user: 'pkallas',
   host: 'localhost',
-  database: process.env.NODE_ENV === 'test' ? 'Drive_By_Test' : 'Drive_By',
+  database: process.env.NODE_ENV === 'test' ? 'drive_by_test' : 'drive_by',
   port: '5432'
 });
 client.connect();

@@ -1,38 +1,41 @@
-DROP DATABASE IF EXISTS Drive_By_Test;
-CREATE DATABASE Drive_By_Test;
+DROP DATABASE IF EXISTS drive_by_test;
+CREATE DATABASE drive_by_test;
 
-\c Drive_By_Test
+\c drive_by_test
 
-CREATE TABLE "drivers" (
-"driver_id"  SERIAL PRIMARY KEY ,
-"first_name" VARCHAR(50) NOT NULL ,
-"last_name" VARCHAR(50) NOT NULL ,
-"email" VARCHAR(250) NOT NULL UNIQUE ,
-"password" VARCHAR(250) NOT NULL ,
-"car" VARCHAR(50) NOT NULL ,
-"drivers_license" VARCHAR(250) NOT NULL ,
-"phone_number" INTEGER NOT NULL UNIQUE ,
-"last_transaction" TIMESTAMP ,
+DROP TABLE IF EXISTS drivers;
+CREATE TABLE drivers (
+driver_id  SERIAL PRIMARY KEY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+email VARCHAR(250) NOT NULL UNIQUE,
+password VARCHAR(250) NOT NULL,
+car VARCHAR(50) NOT NULL,
+drivers_license VARCHAR(250) NOT NULL,
+phone_number VARCHAR(50) NOT NULL UNIQUE,
+last_transaction TIMESTAMP
 );
 
-CREATE TABLE "riders" (
-"rider_id"  SERIAL PRIMARY KEY ,
-"first_name" VARCHAR(50) NOT NULL ,
-"last_name" VARCHAR(50) NOT NULL ,
-"email" VARCHAR(250) NOT NULL UNIQUE ,
-"password" VARCHAR(250) NOT NULL ,
-"payment_id"  SERIAL NOT NULL ,
-"phone_number" INTEGER NOT NULL UNIQUE ,
-"last_transaction" TIMESTAMP ,
+DROP TABLE IF EXISTS riders;
+CREATE TABLE riders (
+rider_id  SERIAL PRIMARY KEY,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+email VARCHAR(250) NOT NULL UNIQUE,
+password VARCHAR(250) NOT NULL,
+payment_id  SERIAL NOT NULL,
+phone_number VARCHAR(50) NOT NULL UNIQUE,
+last_transaction TIMESTAMP
 );
 
-CREATE TABLE "payment_info" (
-"payment_id"  SERIAL PRIMARY KEY  ,
-"card_number" INTEGER UNIQUE ,
-"card_zip" INTEGER ,
-"card_cvv" INTEGER ,
-"card_exp" INTEGER ,
-"card_type" TEXT ,
+DROP TABLE IF EXISTS payment_info;
+CREATE TABLE payment_info (
+payment_id  SERIAL PRIMARY KEY ,
+card_number INTEGER UNIQUE,
+card_zip INTEGER,
+card_cvv INTEGER,
+card_exp INTEGER,
+card_type TEXT
 );
 
-ALTER TABLE "riders" ADD FOREIGN KEY ("payment_id") REFERENCES "payment_info" ("payment_id");
+ALTER TABLE riders ADD FOREIGN KEY (payment_id) REFERENCES payment_info (payment_id);
