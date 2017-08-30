@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const insertIntoDriversText = `INSERT INTO drivers(first_name, last_name, email, password, car,
 drivers_license, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
-function insertIntoDrivers(text, values) {
+function insertIntoDrivers(text, values, callback) {
   let dbPassword = values[3];
   console.log('dbPassword:', dbPassword);
   bcrypt.hash(dbPassword, 10)
@@ -15,7 +15,10 @@ function insertIntoDrivers(text, values) {
     console.log(values[3]);
     console.log(values);
     client.query(text, values)
-    .then(result => console.log('Successfully added data to drivers table'))
+    .then(result => {
+      console.log('Successfully added data to drivers table')
+      callback()
+    })
     .catch(error => {
       console.log('Could not insert into drivers table')
       console.log(error)
@@ -26,6 +29,17 @@ function insertIntoDrivers(text, values) {
     console.log(error)
   })
 }
+
+let driver = [
+  "Aegon",
+  "Taergaryon",
+  "bastard@winterfell.com",
+  "jonsnow",
+  "Infinity Q6",
+  "JS769309784",
+  "3129805541"];
+
+// insertIntoDrivers(insertIntoDriversText, driver);
 
 const insertIntoRidersText = `INSERT INTO drivers(first_name, last_name, email, password, phone_number)
 VALUES ($1, $2, $3, $4, $5)`;
