@@ -24,62 +24,42 @@ const insertIntoDrivers = function (text, values) {
   })
 }
 
-const insertIntoRidersText = `INSERT INTO drivers(first_name, last_name, email, password, phone_number)
+const insertIntoRidersText = `INSERT INTO riders(first_name, last_name, email, password, phone_number)
 VALUES ($1, $2, $3, $4, $5)`;
 
 const insertIntoRiders = function (text, values) {
-  let dbPassword = values[3].pop();
-  bcrypt.hash(dbPassword, 10)
-  .then(hash => {
-    console.log('Successfully hashed the password')
-    dbPassword = hash;
-    values[3].unshift(dbPassword)
-  })
-  .catch(error => {
-    console.log('Could not hash password')
-    console.log(error)
-  })
-  .then(client.query(text, values)
-    .then(result => console.log('Successfully added data to riders table'))
+  return client.query(`INSERT INTO payment_info(card_number) VALUES(NULL)`)
+  .then(result => {
+    let dbPassword = values[3];
+    return bcrypt.hash(dbPassword, 10)
+    .then(hash => {
+      values[3] = hash;
+      return (client.query(text, values)
+      .then(result => console.log('Successfully added data to riders table'))
+      .catch(error => {
+        console.log('Could not insert into riders table')
+        console.log(error)
+      })
+    )
+    })
     .catch(error => {
-      console.log('Could not insert into riders table')
+      console.log('Could not hash password')
       console.log(error)
     })
-  )
+  })
+  .catch(error => console.log(error))
 }
 
-const insertIntoPaymentInfoText = `INSERT INTO payment_info(card_number, card_zip, card_cvv,
-card_exp, card_type) VALUES ($1, $2, $3, $4, $5)`;
+const insertIntoPaymentInfoText = `UPDATE payment_info
+SET card_number = $1, card_zip = $2, card_cvv = $3, card_exp = $4, card_type = $5
+FROM riders
+WHERE payment_info.payment_id = riders.payment_id`;
 
 const insertIntoPaymentInfo = function (text, values) {
-  client.query(text, values)
+  return client.query(text, values)
   .then(result => console.log('Successfully added data to the payment_info table'))
   .catch(error => {
-    console.log('Could not insert into riders table')
-    console.log(error)
-  })
-}
-
-const insertLastTransactionIntoDriversText = `SELECT email FROM drivers WHERE email = $1
-INSERT INTO drivers(last_transaction) VALUES ($2)`
-
-const insertLastTransactionIntoDrivers = function (text, values) {
-  client.query(text, values)
-  .then(result => console.log('Successfully added timestamp to the drivers table'))
-  .catch(error => {
-    console.log('Could not insert into drivers table')
-    console.log(error)
-  })
-}
-
-const insertLastTransactionIntoRidersText = `SELECT email FROM drivers WHERE email = $1
-INSERT INTO drivers(last_transaction) VALUES ($2)`
-
-const insertLastTransactionIntoRiders = function (text, values) {
-  client.query(text, values)
-  .then(result => console.log('Successfully added timestamp to the riders table'))
-  .catch(error => {
-    console.log('Could not insert into riders table')
+    console.log('Could not insert into payment_info table')
     console.log(error)
   })
 }
@@ -91,8 +71,4 @@ module.exports = {
   insertIntoRiders,
   insertIntoPaymentInfoText,
   insertIntoPaymentInfo,
-  insertLastTransactionIntoDriversText,
-  insertLastTransactionIntoDrivers,
-  insertLastTransactionIntoRidersText,
-  insertLastTransactionIntoRiders
 }
