@@ -52,8 +52,6 @@ describe('selectRiders', function() {
     "Taergaryon",
     "khaleesi@motherofdragons.com",
     "theunburned",
-    "Viper",
-    "DS532959048",
     "4358760917"
   ];
   before(function() {

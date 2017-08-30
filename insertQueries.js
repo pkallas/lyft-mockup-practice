@@ -47,7 +47,7 @@ const insertIntoRiders = function (text, values) {
       console.log(error)
     })
   })
-  .catch(error => console.log(error)
+  .catch(error => console.log(error))
 }
 
 const insertIntoPaymentInfoText = `UPDATE payment_info
