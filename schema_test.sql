@@ -12,8 +12,7 @@ CREATE TABLE drivers (
   password VARCHAR(250) NOT NULL,
   car VARCHAR(50) NOT NULL,
   drivers_license VARCHAR(250) NOT NULL,
-  phone_number VARCHAR(250) NOT NULL,
-  last_transaction TIMESTAMP
+  phone_number VARCHAR(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS riders;
@@ -24,18 +23,15 @@ CREATE TABLE riders (
   email VARCHAR(250) NOT NULL UNIQUE,
   password VARCHAR(250) NOT NULL,
   payment_id  SERIAL NOT NULL,
-  phone_number VARCHAR(250) NOT NULL,
-  last_transaction TIMESTAMP
+  phone_number VARCHAR(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS payment_info;
 CREATE TABLE payment_info (
-  payment_id  SERIAL PRIMARY KEY ,
-  card_number INTEGER UNIQUE,
+  payment_id SERIAL PRIMARY KEY,
+  card_number VARCHAR(250) UNIQUE,
   card_zip INTEGER,
   card_cvv INTEGER,
-  card_exp INTEGER,
+  card_exp VARCHAR(250),
   card_type TEXT
 );
-
-ALTER TABLE riders ADD FOREIGN KEY (payment_id) REFERENCES payment_info (payment_id);
