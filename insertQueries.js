@@ -4,37 +4,38 @@ const bcrypt = require('bcrypt');
 const insertIntoDriversText = `INSERT INTO drivers(first_name, last_name, email, password, car,
 drivers_license, phone_number) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
 
-const insertIntoDrivers =  (text, values) => {
-  let dbpassword = values[3].pop();
-  bcrypt.hash(dbpassword, 10)
+function insertIntoDrivers(text, values) {
+  let dbPassword = values[3];
+  console.log('dbpassword:', dbPassword);
+  bcrypt.hash(dbPassword, 10)
   .then(hash => {
     console.log('Successfully hashed the password')
-    dbpassword = hash;
-    values[3].unshift(dbpassword)
-  })
-  .catch(error => {
-    console.log('Could not hash password')
-    console.log(error)
-  })
-  .then(client.query(text, values)
+    console.log(hash);
+    values[3] = hash;
+    console.log(values);
+    client.query(text, values)
     .then(result => console.log('Successfully added data to drivers table'))
     .catch(error => {
       console.log('Could not insert into drivers table')
       console.log(error)
     })
-  )
+  })
+  .catch(error => {
+    console.log('Could not hash password')
+    console.log(error)
+  })
 }
 
 const insertIntoRidersText = `INSERT INTO drivers(first_name, last_name, email, password, phone_number)
 VALUES ($1, $2, $3, $4, $5)`;
 
-const insertIntoRiders = (text, values) => {
-  let dbpassword = values[3].pop();
-  bcrypt.hash(dbpassword, 10)
+function insertIntoRiders(text, values) {
+  let dbPassword = values[3].pop();
+  bcrypt.hash(dbPassword, 10)
   .then(hash => {
     console.log('Successfully hashed the password')
-    dbpassword = hash;
-    values[3].unshift(dbpassword)
+    dbPassword = hash;
+    values[3].unshift(dbPassword)
   })
   .catch(error => {
     console.log('Could not hash password')
@@ -52,7 +53,7 @@ const insertIntoRiders = (text, values) => {
 const insertIntoPaymentInfoText = `INSERT INTO payment_info(card_number, card_zip, card_cvv,
 card_exp, card_type) VALUES ($1, $2, $3, $4, $5)`;
 
-const insertIntoPaymentInfo = (text, values) => {
+function insertIntoPaymentInfo(text, values) {
   client.query(text, values)
   .then(result => console.log('Successfully added data to the payment_info table'))
   .catch(error => {
@@ -64,7 +65,7 @@ const insertIntoPaymentInfo = (text, values) => {
 const insertLastTransactionIntoDriversText = `SELECT email FROM drivers WHERE email = $1
 INSERT INTO drivers(last_transaction) VALUES ($2)`
 
-const insertLastTransactionIntoDrivers = (text, values) => {
+function insertLastTransactionIntoDrivers(text, values) {
   client.query(text, values)
   .then(result => console.log('Successfully added timestamp to the drivers table'))
   .catch(error => {
@@ -76,7 +77,7 @@ const insertLastTransactionIntoDrivers = (text, values) => {
 const insertLastTransactionIntoRidersText = `SELECT email FROM drivers WHERE email = $1
 INSERT INTO drivers(last_transaction) VALUES ($2)`
 
-const insertLastTransactionIntoRiders = (text, values) => {
+function insertLastTransactionIntoRiders(text, values) {
   client.query(text, values)
   .then(result => console.log('Successfully added timestamp to the riders table'))
   .catch(error => {
@@ -95,5 +96,5 @@ module.exports = {
   insertLastTransactionIntoDriversText,
   insertLastTransactionIntoDrivers,
   insertLastTransactionIntoRidersText,
-  insertinsertLastTransactionIntoRiders
+  insertLastTransactionIntoRiders
 }
