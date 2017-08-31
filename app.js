@@ -33,11 +33,7 @@ app.get('/logout', (req, res) => {
 })
 
 app.use(bodyParser.urlencoded({extended: false}))
-
 app.use(loginDriverRouter)
-
 app.use(loginRiderRouter)
-
 app.use(signupRiderRouter)
-
 app.use(signupDriverRouter)

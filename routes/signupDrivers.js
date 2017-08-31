@@ -1,11 +1,9 @@
 const express = require('express')
 const signupDriverRouter = express.Router()
-
 const {
   selectDriversEmailText,
   selectDriversEmail
 } = require('../selectQueries.js');
-
 const {
   insertIntoDriversText,
   insertIntoDrivers

@@ -1,12 +1,9 @@
 const express = require('express')
 const signupRiderRouter = express.Router()
-
 const {
   selectRidersEmailText,
   selectRidersEmail
 } = require('../selectQueries.js');
-
-
 const {
   insertIntoRidersText,
   insertIntoRiders
