@@ -2,21 +2,8 @@ const express = require('express');
 const loginDriverRouter = express.Router();
 const {
   selectDriversText,
-  selectRidersText,
-  lastTransactionDriversText,
-  lastTransactionRidersText,
-  selectDrivers,
-  selectRiders
+  selectDrivers
 } = require('../selectQueries.js');
-
-const {
-  insertIntoDriversText,
-  insertIntoDrivers,
-  insertIntoRidersText,
-  insertIntoRiders,
-  insertIntoPaymentInfoText,
-  insertIntoPaymentInfo
-} = require('../insertQueries.js');
 
 loginDriverRouter.get('/driverlogin', (req, res) => {
   let errorObj = {

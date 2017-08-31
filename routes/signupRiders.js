@@ -2,24 +2,14 @@ const express = require('express')
 const signupRiderRouter = express.Router()
 
 const {
-  selectDriversText,
-  selectRidersText,
-  lastTransactionDriversText,
-  lastTransactionRidersText,
-  selectDrivers,
-  selectRiders,
   selectRidersEmailText,
   selectRidersEmail
 } = require('../selectQueries.js');
 
 
 const {
-  insertIntoDriversText,
-  insertIntoDrivers,
   insertIntoRidersText,
-  insertIntoRiders,
-  insertIntoPaymentInfoText,
-  insertIntoPaymentInfo
+  insertIntoRiders
 } = require('../insertQueries.js');
 
 signupRiderRouter.get('/signuprider', (req, res) => {
@@ -36,7 +26,7 @@ signupRiderRouter.get('/signuprider', (req, res) => {
   }
   else if (req.query.error === 'error1') {
     errorObj.error = true
-    errorObj.message = 'Please provide email and password to sign up'
+    errorObj.message = 'Please fill out all forms to continue'
     res.render('signuprider', errorObj)
   }
   else if (req.query.error === 'error2') {
