@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>login</title>
+  </head>
+  <body>
+    <% if (error) {%>
+    <p><%= message %> </p>
+  <% }%>
+  <form action='/driverlogin' method='POST'>
+    email: <input type='text' name='email'>
+    password: <input type='password' name='password'>
+    <input type='submit' value='Login'>
+  </form>
+  </body>
+</html>

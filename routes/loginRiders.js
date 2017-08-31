@@ -50,7 +50,7 @@ loginRiderRouter.post('/riderlogin', (req, res, next) => {
       if(result === true) {
         next()
       } else {
-        res.redirect('/driverlogin/?error=error2')
+        res.redirect('/riderlogin/?error=error2')
       }
     })
     .catch(error => res.redirect(console.error(error)))

@@ -35,7 +35,7 @@ signupDriverRouter.get('/signupdriver', (req, res) => {
   }
   else if (req.query.error === 'error1') {
     errorObj.error = true
-    error.message = 'Please provide email and password to sign up'
+    errorObj.message = 'Please provide email and password to sign up'
     res.render('signupdriver', errorObj)
   }
   else if (req.query.error === 'error2') {
@@ -43,17 +43,17 @@ signupDriverRouter.get('/signupdriver', (req, res) => {
     errorObj.message = 'Passwords do not match'
     res.render('signupdriver', errorObj)
   }
-  else if (req.query.error === true) {
+  else if (req.query.error === 'error3') {
     errorObj.activeUserError = true
     res.render('signupdriver', errorObj)
   }
 })
 
 signupDriverRouter.post('/signupdriver', (req, res, next) => {
-  if(!req.body.email || !req.body.password || !req.body.confirmPasword) {
+  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.car || !req.body.phoneNumber || !req.body.driversLicense ) {
     res.redirect('/signupdriver/?error=error1')
   }
-  else if(req.body.password !== req.body.confirmPasword) {
+  else if(req.body.password !== req.body.confirmPassword) {
     res.redirect('/signupdriver/?error=error2')
   }
   else{
@@ -67,6 +67,7 @@ signupDriverRouter.post('/signupdriver', (req, res, next) => {
         .catch(error => res.redirect(console.log(error)))
       }
     })
+    .catch(error => res.redirect('/signupdriver/?error=error3'))
   }
 })
 

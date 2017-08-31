@@ -42,7 +42,7 @@ loginDriverRouter.get('/driverlogin', (req, res) => {
 })
 
 loginDriverRouter.post('/driverlogin', (req, res, next) => {
-  if(!req.body.email || !req.body.password) {
+  if(!req.body.email || !req.body.password || req.body.confirmPassword || req.body.firstName || req.body.lastName || req.body.phoneNumber || req.body.car || req.body.driversLicense) {
     res.redirect('driverlogin/?error=error1')
   } else {
     return selectDrivers(selectDriversText, [req.body.email], req.body.password)

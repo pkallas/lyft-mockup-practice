@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const loginDriverRouter = require('./routes/loginDrivers.js');
 const loginRiderRouter = require('./routes/loginRiders.js');
-const signupRiderRouter = require('./routes/signupRider.js');
-const signupDriverRouter = require('./routes/signupDriver.js');
+const signupRiderRouter = require('./routes/signupRiders.js');
+const signupDriverRouter = require('./routes/signupDrivers.js');
 
 if(process.env.NODE_ENV === 'test') {
   app.EXPRESS_APP = true;
@@ -26,12 +26,12 @@ app.use(cookieSession({
   secret: 'npnldcjdbbnn75239n894'
 }))
 
-app.get('/', (req, res) {
+app.get('/', (req, res) => {
   !req.session.email ? user = 'Stranger' : user = req.session.email
   res.render('homepage', {user})
 })
 
-app.get('/logout', (req, res) {
+app.get('/logout', (req, res) => {
   req.session = null;
   res.redirect('/')
 })

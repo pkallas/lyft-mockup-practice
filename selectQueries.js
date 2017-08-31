@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const selectDriversText = `SELECT email, password FROM drivers WHERE email = $1`;
 const selectRidersText = `SELECT email, password FROM riders WHERE email = $1`;
 const selectDriversEmailText = `SELECT email FROM drivers WHERE email = $1`;
-const selectRidersEmailText = `SELECT email FROM riders WHERE email =$1`;
+const selectRidersEmailText = `SELECT email FROM riders WHERE email = $1`;
 
 const selectDrivers = function(text, values, password) {
   let dbPassword = ""
