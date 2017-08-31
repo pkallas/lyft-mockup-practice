@@ -41,11 +41,11 @@ loginDriverRouter.get('/driverlogin', (req, res) => {
   }
 })
 
-loginDriverRouter.post('/driverlogin', (req, res, next) {
+loginDriverRouter.post('/driverlogin', (req, res, next) => {
   if(!req.body.email || !req.body.password) {
     res.redirect('driverlogin/?error=error1')
   } else {
-    selectDrivers(selectDriversText, [req.body.email], req.body.password)
+    return selectDrivers(selectDriversText, [req.body.email], req.body.password)
     .then(result => {
       if(result === true) {
         next()
