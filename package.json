@@ -7,7 +7,7 @@
     "start": "nodemon app.js",
     "db-init": "psql < schema.sql",
     "testdb-init": "psql < schema_test.sql",
-    "test": "mocha test/selectQueries_test.js"
+    "test": "mocha test"
   },
   "author": "pkallas",
   "license": "ISC",
