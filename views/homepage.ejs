@@ -7,13 +7,13 @@
   <body>
     <p>Hello <%= user %> </p>
     <% if (user === 'Stranger') {%>
-      <a href='/driverlogin'>loginasdriver</a>
-      <a href='/riderlogin'>loginasrider</a>
-      <a href='/signupdriver'>signasdriver</a>
-      <a href='/signuprider'>signuprider</a>
+      <a href='/driverlogin'>Login as driver</a>
+      <a href='/riderlogin'>Login as rider</a>
+      <a href='/signupdriver'>Sign up as driver</a>
+      <a href='/signuprider'>Sign up as driver</a>
     <% } %>
     <% if(user !== 'Stranger') {%>
-      <p>You are in the wrong place, let's get you back home</p>
+      <p>There's not much here, but hopefully you will enjoy these emojis: 🤑😎🌚</p>
       <a href='/logout'>Logout</a>
  <% } %>
   </body>

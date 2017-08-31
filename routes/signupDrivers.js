@@ -2,23 +2,13 @@ const express = require('express')
 const signupDriverRouter = express.Router()
 
 const {
-  selectDriversText,
-  selectRidersText,
-  lastTransactionDriversText,
-  lastTransactionRidersText,
-  selectDrivers,
-  selectRiders,
   selectDriversEmailText,
   selectDriversEmail
 } = require('../selectQueries.js');
 
 const {
   insertIntoDriversText,
-  insertIntoDrivers,
-  insertIntoRidersText,
-  insertIntoRiders,
-  insertIntoPaymentInfoText,
-  insertIntoPaymentInfo
+  insertIntoDrivers
 } = require('../insertQueries.js');
 
 signupDriverRouter.get('/signupdriver', (req, res) => {
@@ -35,7 +25,7 @@ signupDriverRouter.get('/signupdriver', (req, res) => {
   }
   else if (req.query.error === 'error1') {
     errorObj.error = true
-    errorObj.message = 'Please provide email and password to sign up'
+    errorObj.message = 'Please fill out all forms to continue'
     res.render('signupdriver', errorObj)
   }
   else if (req.query.error === 'error2') {

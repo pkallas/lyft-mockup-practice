@@ -7,16 +7,12 @@ const loginRiderRouter = require('./routes/loginRiders.js');
 const signupRiderRouter = require('./routes/signupRiders.js');
 const signupDriverRouter = require('./routes/signupDrivers.js');
 
-if(process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
   app.EXPRESS_APP = true;
-  app.listen(3000, () => {
-    console.log('http://localhost:3000');
-  })
+  app.listen(3000, () => console.log('http://localhost:3000'))
   module.exports = app;
 } else {
-  app.listen(3000, () => {
-    console.log('http://localhost:3000');
-  })
+  app.listen(3000, () => console.log('http://localhost:3000'))
 }
 
 app.set('view engine', 'ejs')
