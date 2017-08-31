@@ -30,8 +30,8 @@ DROP TABLE IF EXISTS payment_info;
 CREATE TABLE payment_info (
   payment_id SERIAL PRIMARY KEY,
   card_number VARCHAR(250) UNIQUE,
-  card_zip INTEGER,
-  card_cvv INTEGER,
+  card_zip VARCHAR(250),
+  card_cvv VARCHAR(250),
   card_exp VARCHAR(250),
-  card_type TEXT
+  card_type VARCHAR(250)
 );

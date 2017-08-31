@@ -70,5 +70,5 @@ module.exports = {
   insertIntoRidersText,
   insertIntoRiders,
   insertIntoPaymentInfoText,
-  insertIntoPaymentInfo,
+  insertIntoPaymentInfo
 }

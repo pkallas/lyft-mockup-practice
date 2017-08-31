@@ -40,7 +40,9 @@ signupDriverRouter.get('/signupdriver', (req, res) => {
 })
 
 signupDriverRouter.post('/signupdriver', (req, res, next) => {
-  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.car || !req.body.phoneNumber || !req.body.driversLicense ) {
+  if(!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password ||
+    !req.body.confirmPassword || !req.body.car || !req.body.phoneNumber ||
+    !req.body.driversLicense ) {
     res.redirect('/signupdriver/?error=error1')
   }
   else if(req.body.password !== req.body.confirmPassword) {
@@ -52,7 +54,9 @@ signupDriverRouter.post('/signupdriver', (req, res, next) => {
       if(result === req.body.email) {
         res.redirect('/signupdriver/?error=error3')
       } else {
-        return insertIntoDrivers(insertIntoDriversText, [req.body.firstName, req.body.lastName, req.body.email, req.body.password, req.body.car, req.body.driversLicense, req.body.phoneNumber])
+        return insertIntoDrivers(insertIntoDriversText, [req.body.firstName, req.body.lastName,
+          req.body.email, req.body.password, req.body.car, req.body.driversLicense,
+          req.body.phoneNumber])
         .then(result => next())
         .catch(error => res.redirect(console.log(error)))
       }

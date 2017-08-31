@@ -41,7 +41,8 @@ signupRiderRouter.get('/signuprider', (req, res) => {
 })
 
 signupRiderRouter.post('/signuprider', (req, res, next) => {
-  if(!req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.firstName || !req.body.lastName || !req.body.phoneNumber) {
+  if(!req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.firstName ||
+    !req.body.lastName || !req.body.phoneNumber) {
     res.redirect('/signuprider/?error=error1')
   }
   else if(req.body.password !== req.body.confirmPassword) {
@@ -53,7 +54,8 @@ signupRiderRouter.post('/signuprider', (req, res, next) => {
       if(result === req.body.email) {
         res.redirect('/signuprider/?error=error3')
       } else {
-        return insertIntoRiders(insertIntoRidersText, [req.body.firstName, req.body.lastName, req.body.email, req.body.password, req.body.phoneNumber])
+        return insertIntoRiders(insertIntoRidersText, [req.body.firstName, req.body.lastName,
+        req.body.email, req.body.password, req.body.phoneNumber])
         .then(result => next())
         .catch(error => res.redirect(console.log(error)))
       }
