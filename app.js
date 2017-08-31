@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const loginDriverRouter = require('./routes/loginDrivers.js');
+const loginRiderRouter = require('./routes/loginRiders.js');
+const signupRiderRouter = require('./routes/signupRider.js');
+const signupDriverRouter = require('./routes/signupDriver.js');
 
 if(process.env.NODE_ENV === 'test') {
   app.EXPRESS_APP = true;
@@ -36,3 +39,9 @@ app.get('/logout', (req, res) {
 app.use(bodyParser.urlencoded({extended: false}))
 
 app.use(loginDriverRouter)
+
+app.use(loginRiderRouter)
+
+app.use(signupRiderRouter)
+
+app.use(signupDriverRouter)
