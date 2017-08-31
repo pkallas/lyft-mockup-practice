@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% if(error){%>
+      <p><%= message %> </p>
+    <% } else if (activeUserError) { %>
+      <p>Already an active user, please <a href='/driverlogin'>login</a></p>
+    <% } %>
+   <form action='/signupdriver' method='POST'>
+     first name:<input type='text' name='firstName'>
+     last name:<input type='text' name='lastName'>
+     email:<input type='text' name='email'>
+     password:<input type='password' name='password'>
+     confirm password:<input type='password' name='confirmPassword'>
+     car:<input type='text' name='car'>
+     drivers license:<input type='text' name='driversLicense'>
+     phone number:<input type='text' name='phoneNumber'>
+     <input type='submit' value='Signup'>
+   </form>
+  </body>
+</html>

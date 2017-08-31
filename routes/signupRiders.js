@@ -36,7 +36,7 @@ signupRiderRouter.get('/signuprider', (req, res) => {
   }
   else if (req.query.error === 'error1') {
     errorObj.error = true
-    error.message = 'Please provide email and password to sign up'
+    errorObj.message = 'Please provide email and password to sign up'
     res.render('signuprider', errorObj)
   }
   else if (req.query.error === 'error2') {
@@ -44,17 +44,17 @@ signupRiderRouter.get('/signuprider', (req, res) => {
     errorObj.message = 'Passwords do not match'
     res.render('signuprider', errorObj)
   }
-  else if (req.query.error === true) {
+  else if (req.query.error === 'error3') {
     errorObj.activeUserError = true
     res.render('signuprider', errorObj)
   }
 })
 
 signupRiderRouter.post('/signuprider', (req, res, next) => {
-  if(!req.body.email || !req.body.password || !req.body.confirmPasword) {
+  if(!req.body.email || !req.body.password || !req.body.confirmPassword || !req.body.firstName || !req.body.lastName || !req.body.phoneNumber) {
     res.redirect('/signuprider/?error=error1')
   }
-  else if(req.body.password !== req.body.confirmPasword) {
+  else if(req.body.password !== req.body.confirmPassword) {
     res.redirect('/signuprider/?error=error2')
   }
   else{

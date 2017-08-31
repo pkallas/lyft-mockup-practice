@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>Hello <%= user %> </p>
+    <% if (user === 'Stranger') {%>
+      <a href='/driverlogin'>loginasdriver</a>
+      <a href='/riderlogin'>loginasrider</a>
+      <a href='/signupdriver'>signasdriver</a>
+      <a href='/signuprider'>signuprider</a>
+    <% } %>
+    <% if(user !== 'Stranger') {%>
+      <p>You are in the wrong place, let's get you back home</p>
+      <a href='/logout'>Logout</a>
+ <% } %>
+  </body>
+</html>
