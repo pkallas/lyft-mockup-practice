@@ -5,51 +5,51 @@ const selectRidersText = `SELECT email, password FROM riders WHERE email = $1`;
 const selectDriversEmailText = `SELECT email FROM drivers WHERE email = $1`;
 const selectRidersEmailText = `SELECT email FROM riders WHERE email = $1`;
 
-const selectDrivers = function(text, values, password) {
-  let dbPassword = ""
+const selectDrivers = function (text, values, password) {
+  let dbPassword;
   return client.query(text, values)
   .then(result => {
-    dbPassword = result.rows[0].password
+    dbPassword = result.rows[0].password;
     return bcrypt.compare(password, dbPassword)
-    .then(result => result)
+    .then(result => result);
   })
   .catch(error => {
     console.log('Did not find driver');
     console.log(error);
-  })
-}
+  });
+};
 
-const selectRiders = function(text, values, password) {
-  let dbPassword =""
+const selectRiders = function (text, values, password) {
+  let dbPassword;
   return client.query(text, values)
   .then(result => {
-    dbPassword = result.rows[0].password
+    dbPassword = result.rows[0].password;
     return bcrypt.compare(password, dbPassword)
-    .then(result => result)
+    .then(result => result);
   })
   .catch(error => {
     console.log('Did not find rider');
     console.log(error);
-  })
-}
+  });
+};
 
-const selectDriversEmail = function(text, values) {
+const selectDriversEmail = function (text, values) {
   return client.query(text, values)
   .then(result => result.rows[0].email)
   .catch(error => {
     console.log(error);
-    return undefined
-  })
-}
+    return undefined;
+  });
+};
 
-const selectRidersEmail = function(text, values) {
+const selectRidersEmail = function (text, values) {
   return client.query(text, values)
   .then(result => result.rows[0].email)
   .catch(error => {
     console.log(error);
-    return undefined
-  })
-}
+    return undefined;
+  });
+};
 
 module.exports = {
   selectDriversText,
@@ -59,5 +59,5 @@ module.exports = {
   selectDriversEmailText,
   selectDriversEmail,
   selectRidersEmail,
-  selectRidersEmailText
-}
+  selectRidersEmailText,
+};
