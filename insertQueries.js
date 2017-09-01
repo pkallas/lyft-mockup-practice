@@ -10,9 +10,7 @@ const insertIntoDrivers = function (text, values) {
  .then(hash => {
    values[3] = hash;
    return client.query(text, values)
-   .then(result => {
-     console.log('Successfully added data to drivers table')
-   })
+   .then(result => console.log('Successfully added data to drivers table'))
    .catch(error => {
      console.log('Could not insert into drivers table')
      console.log(error)
