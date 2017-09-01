@@ -24,6 +24,9 @@ loginDriverRouter.get('/driverlogin', (req, res) => {
     errorObj.error = true;
     errorObj.message = 'Email or password was incorrect. Do it over.';
     res.render('driverlogin', errorObj);
+  } else if (res.query.error === 'error3') {
+    errorObj.error = true;
+    errorObj.message = 'Error, please try again.';
   }
 });
 
@@ -39,7 +42,10 @@ loginDriverRouter.post('/driverlogin', (req, res, next) => {
         res.redirect('/driverlogin/?error=error2');
       }
     })
-  .catch(error => res.redirect(console.error(error)));
+  .catch(error => {
+      console.log(error);
+      res.status(500).redirect('/driverlogin/?error=error3');
+    });
   }
 });
 

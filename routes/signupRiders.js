@@ -25,15 +25,18 @@ signupRiderRouter.get('/signuprider', (req, res) => {
     res.render('signuprider', errorObj);
   } else if (req.query.error === 'error1') {
     errorObj.error = true;
-    errorObj.message = 'Please fill out all forms to continue';
+    errorObj.message = 'Please fill out all forms to continue.';
     res.render('signuprider', errorObj);
   } else if (req.query.error === 'error2') {
     errorObj.error = true;
-    errorObj.message = 'Passwords do not match';
+    errorObj.message = 'Passwords do not match, try again.';
     res.render('signuprider', errorObj);
   } else if (req.query.error === 'error3') {
     errorObj.activeUserError = true;
     res.render('signuprider', errorObj);
+  } else if (req.query.error === 'error4') {
+    errorObj.error = true;
+    errorObj.message = 'Error, please try again.';
   }
 });
 
@@ -52,7 +55,10 @@ signupRiderRouter.post('/signuprider', (req, res, next) => {
         return insertIntoRiders(insertIntoRidersText, [req.body.firstName, req.body.lastName,
         req.body.email, req.body.password, req.body.phoneNumber])
         .then(result => next())
-        .catch(error => res.redirect(console.log(error)));
+        .catch(error => {
+          console.log(error);
+          res.set(500).redirect('/signuprider/?error=error4');
+        });
       }
     });
   }

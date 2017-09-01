@@ -34,6 +34,9 @@ signupDriverRouter.get('/signupdriver/', (req, res) => {
   } else if (req.query.error === 'error3') {
     errorObj.activeUserError = true;
     res.render('signupdriver', errorObj);
+  } else if (req.query.error === 'error4') {
+    errorObj.error = true;
+    errorObj.message = 'Error, please try again.';
   }
 });
 
@@ -54,10 +57,13 @@ signupDriverRouter.post('/signupdriver', (req, res, next) => {
           req.body.email, req.body.password, req.body.car, req.body.driversLicense,
           req.body.phoneNumber])
         .then(result => next())
-        .catch(error => res.redirect(console.log(error)));
+        .catch(error => res.status(500).redirect('/signupdriver/?error=error4'));
       }
     })
-    .catch(error => res.redirect('/signupdriver/?error=error3'));
+    .catch(error => {
+      console.log(error);
+      res.redirect('/signupdriver/?error=error4');
+    });
   }
 });
 
