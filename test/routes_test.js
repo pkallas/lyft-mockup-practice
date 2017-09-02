@@ -193,6 +193,16 @@ describe('app', function () {
     return request(app)
     .post('/driverlogin')
     .set('content-type', 'application/x-www-form-urlencoded')
+    .send({ email: 'pkallas@gmail.com',
+          password: '',
+        })
+    .then(result => expect(result).to.redirect);
+  });
+
+  it('should redirect if not all forms are filled out', function () {
+    return request(app)
+    .post('/driverlogin')
+    .set('content-type', 'application/x-www-form-urlencoded')
     .send({ email: '',
           password: '123',
         })
@@ -235,5 +245,15 @@ describe('app', function () {
     .then(function (result) {
       expect(result.redirects[0]).to.match(/\/riderlogin\/\?error=error1$/);
     });
+  });
+
+  it('should redirect if not all forms are filled out', function () {
+    return request(app)
+    .post('/riderlogin')
+    .set('content-type', 'application/x-www-form-urlencoded')
+    .send({ email: '',
+          password: '123',
+        })
+    .then(result => expect(result).to.redirect);
   });
 });
